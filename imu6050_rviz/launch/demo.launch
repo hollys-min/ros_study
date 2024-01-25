@@ -1,0 +1,9 @@
+<launch>
+
+  <node pkg="imu6050_rviz" type="imu6050_rviz_pub" name="imu6050_rviz_pub" required="true">
+    <param name="port" value="/dev/ttyACM0"/>
+  </node>
+
+  <node pkg="rviz" type="rviz" name="rviz" args="-d $(find imu6050_rviz)/rviz/demo.rviz" required="true"/>
+
+</launch>
