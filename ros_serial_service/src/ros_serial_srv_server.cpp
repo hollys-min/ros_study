@@ -1,4 +1,4 @@
-#include "ros/ros.h"                          // ROS Default Header File
+#include "ros/ros.h"                     // ROS Default Header File
 #include "ros_serial_service/SrvSerial.h"// Service1 Service File Header (Automatically created after build)
 #include <serial/serial.h>
 
@@ -16,7 +16,7 @@ bool calculation(ros_serial_service::SrvSerial::Request &req,
     ROS_INFO("request: motor start");
     ser.write("b\n");
   }
-  // The service name is 'ros_tutorial_srv' and it will call 'calculation' function upon the service request.
+  // The service name is 'ros_ser_srv' and it will call 'calculation' function upon the service request.
   res.result = 20;
 
   // Displays 'a' and 'b' values used in the service request and
@@ -35,7 +35,7 @@ int main(int argc, char **argv)              // Node Main Function
   ros::NodeHandle nh;                        // Node handle declaration
 
  
-  ser.setPort("/dev/ttyACM0");  // Replace with your serial port name
+  ser.setPort("/dev/ttyUSB0");  // Replace with your serial port name
   ser.setBaudrate(115200);
   serial::Timeout timeout = serial::Timeout::simpleTimeout(1000);
   ser.setTimeout(timeout);
@@ -46,9 +46,9 @@ int main(int argc, char **argv)              // Node Main Function
     return -1;
   }
 
-  // Declare service server 'ros_service_server'
-  // using the 'Service1' service file in the 'ros_service' package.
-  // The service name is 'ros_srv' and it will call 'calculation' function
+  // Declare service server 'ros_serial_srv_server'
+  // using the 'SrvSerial' service file in the 'ros_serial_service' package.
+  // The service name is 'ros_ser_srv' and it will call 'calculation' function
   // upon the service request.
   ros::ServiceServer ros_service_server = nh.advertiseService("ros_ser_srv", calculation);
 
